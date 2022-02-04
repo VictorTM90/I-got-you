@@ -31,15 +31,27 @@ Las abuelas disparan zapatillas, pero se reduce la velocidad.
 
 
 **Data Structure** 
-Class Grandma 
-    Aparecen aleatoriamente 
+
+Class Grandma:
+    Propiedades ()
+
+    Métodos[draw / move ] 
 
 
-Class Child
-    
+Class Child: 
+    Propiedades:  ()
 
-Class List
+    Métodos [draw, move, jump ] 
 
+Class Game: 
+    Propiedades: ()
+
+    Métodos : [ GameLoop, collision, background, clearCanvas, spawningGrandma ]
+
+Class time: 
+    Propiedades: ()
+
+    Métodos [...]
 
 
 **States y States Transitions**
