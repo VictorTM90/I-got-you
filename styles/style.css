@@ -20,13 +20,17 @@ body {
     margin-top: 40px;
     border-radius: 10px;
     font-family: 'Franklin Gothic Medium';
-   
-    border-color: none;
+    
 
     
 }
 
 
+#front-img{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  
+}
 .container{
     background-color: rgb(222, 110, 130);
     display: flex; 
@@ -37,3 +41,6 @@ body {
 
 }
 
+#canvas, #gameover-screen{
+    display: none; 
+}
