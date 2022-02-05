@@ -15,6 +15,10 @@ const startGame = () =>{
     startGameScreen.style.display = "none";
    // aparece el juego
     canvas.style.display = "flex" ; 
+    // se inicia el juego 
+    newGame = new Game();
+    
+    newGame.gameLoop()
 
 }
 
