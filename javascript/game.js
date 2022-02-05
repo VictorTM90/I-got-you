@@ -2,17 +2,21 @@ class Game {
   constructor() {
     this.bg = new Image();
     this.bg.src = "./img/fondo.png";
+    this.boy = new Boy();
   }
 
   // *FUNCIONES
 
   //? El background: Dibujar y limpiar.
-  clearBackground = () => {
+     clearBackground = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   };
   drawBackground = () => {
     ctx.drawImage(this.bg, 0, 0, canvas.width, canvas.height);
   };
+ 
+
+
 
   //?
 
@@ -25,10 +29,13 @@ class Game {
 
     // dibujar elementos
     this.drawBackground();
-   // this.boy.drawBoy();
+    this.boy.drawBoy();
     //console.log (this.boy.drawBoy())
     
     // recursion para la animacion
     requestAnimationFrame(this.gameLoop);
   };
+
+
+
 }

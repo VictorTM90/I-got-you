@@ -29,6 +29,9 @@ const startGame = () =>{
 let startButton = document.querySelector("#start-game-btn");
 startButton.addEventListener("click", startGame );
 
-
+document.addEventListener ("keydown", (event)=>{
+    // console.log (event.key)
+     newGame.boy.moveBoy(event);
+})
 
 
