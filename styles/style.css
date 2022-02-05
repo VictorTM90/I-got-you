@@ -1,0 +1,39 @@
+body {
+    margin: 0;
+    background-color: rgb(222, 110, 130);
+    
+}
+
+
+
+#canvas {
+    background-color: lightgray;
+}
+
+
+
+#start-game-btn, #restart-btn{
+    background-color: rgb(110, 218, 222);
+    color:rgb(255, 255, 255);
+    padding:20px;
+    font-size: 20px;
+    margin-top: 40px;
+    border-radius: 10px;
+    font-family: 'Franklin Gothic Medium';
+   
+    border-color: none;
+
+    
+}
+
+
+.container{
+    background-color: rgb(222, 110, 130);
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 50px;
+
+}
+
