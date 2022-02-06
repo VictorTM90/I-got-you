@@ -3,6 +3,7 @@ class Game {
     this.bg = new Image();
     this.bg.src = "./img/fondo.png";
     this.boy = new Boy();
+   //! this.grandma = new Grandma();
   }
 
   // *FUNCIONES
@@ -30,6 +31,7 @@ class Game {
     // dibujar elementos
     this.drawBackground();
     this.boy.drawBoy();
+   //! this.grandma.drawGrandMa();
     //console.log (this.boy.drawBoy())
     
     // recursion para la animacion
