@@ -3,21 +3,64 @@ class Game {
     this.bg = new Image();
     this.bg.src = "./img/fondo.png";
     this.boy = new Boy();
-   //! this.grandma = new Grandma();
+    this.grandMaArr = [new Grandma(0,150, "../img/grand-ma2.png")];
+    this.isGameOver = false; 
   }
 
   // *FUNCIONES
 
   //? El background: Dibujar y limpiar.
-     clearBackground = () => {
+  clearBackground = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   };
   drawBackground = () => {
     ctx.drawImage(this.bg, 0, 0, canvas.width, canvas.height);
   };
- 
+  //*spawn de abuelas aleatorio en dos carrilles
 
+  spawnGrandMa = () => {
+    let lastGrandMa = this.grandMaArr[this.grandMaArr.length - 1];
+    if (lastGrandMa.x > canvas.width - 550) {
+      let randomY = Math.floor(Math.random()* 350)+ 150 //! ATENTO AL RESPONSIVE MEDIDAS!!!!!
+      let newGrandma = new Grandma(randomY, "../img/grand-ma2.png");
+      this.grandMaArr.push(newGrandma);
+    }
+    
+    if (this.grandMaArr.length > 10){
+      this.grandMaArr.slice()
+    }
+  };
+  //eliminar las abuelas del array.
 
+  boyLimitedMov = () => {
+    if (this.boy.x > canvas.width - this.boy.width) {
+      this.boy.x = canvas.width - this.boy.width;
+    } else if (this.boy.x < 0) {
+      this.boy.x = 0;
+    } else if (this.boy.y > canvas.height -this.boy.height){
+      this.boy.y = canvas.height - this.boy.height;
+    } else if (this.boy.y < canvas.height/6 ){
+      this.boy.y = canvas.height/6 
+
+    }
+
+  }
+
+  // collisiones
+
+  collisionBoyGrandMa = (eachGrandMaParam) =>{
+   if(
+      this.boy.x < eachGrandMaParam.x + eachGrandMaParam.width/2 &&
+      this.boy.x + this.boy.width/2>eachGrandMaParam.x &&
+      this.boy.y< eachGrandMaParam.y + eachGrandMaParam.height /1.25&&
+      this.boy.height /1.25 + this.boy.y> eachGrandMaParam.y
+    ){
+      this.isGameOver = true; 
+      canvas.style.display = "none"
+      gameOverScreen.style.display = "flex"
+
+    }
+  }
 
   //?
 
@@ -26,18 +69,37 @@ class Game {
 
     //limpiar el canvas
     this.clearBackground();
-    //movimientos y acciones
+
+    //MOVIMIENTOS Y ACCIONES
+    //todo: Boy
+    this.boyLimitedMov();
+    //todo: ABUELA
+    //* SPAWN
+    this.grandMaArr.forEach((eachGrandMa) => {
+      eachGrandMa.moveGrandMa();
+    });
+    this.spawnGrandMa();
+
+    //todo: COLISIONES
+
+    this.grandMaArr.forEach((eachGrandMaParam)=>{
+      this.collisionBoyGrandMa(eachGrandMaParam);
+    })
+
+    
+    //*MOVE
 
     // dibujar elementos
+
     this.drawBackground();
     this.boy.drawBoy();
-   //! this.grandma.drawGrandMa();
-    //console.log (this.boy.drawBoy())
+    this.grandMaArr.forEach((eachGrandMa) => {
+      eachGrandMa.drawGrandMa();
+    });
+
     
+
     // recursion para la animacion
     requestAnimationFrame(this.gameLoop);
   };
-
-
-
 }

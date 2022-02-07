@@ -1,7 +1,7 @@
 class Grandma {
-    constructor(){
-        this.x = 15;
-        this.y= canvas.height / 3;
+    constructor(positionX,postionY){
+        this.x = positionX;
+        this.y= postionY;
         this.width = 100;
         this.height = 125;
         this.img = new Image ();
@@ -13,6 +13,9 @@ class Grandma {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
     
+    moveGrandMa = () =>{
+        this.x = this.x + 3;
+    }
 
 
 

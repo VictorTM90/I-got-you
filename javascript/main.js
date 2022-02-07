@@ -18,7 +18,7 @@ const startGame = () =>{
     // se inicia el juego 
     newGame = new Game();
     
-    newGame.gameLoop()
+    newGame.gameLoop();
 
 }
 

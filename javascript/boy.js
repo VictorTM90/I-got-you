@@ -2,11 +2,14 @@ class Boy {
   constructor() {
     this.x = canvas.width / 2; // posición en el eje x
     this.y = canvas.height / 2; // posicion en el eje y
-    this.width = 100;
-    this.height = 120;
+
+    this.width = 90;
+    this.height = 105;
     this.img = new Image();
     this.img.src = "./img/run-boy.png";
   }
+  //*VARIABLES DEL CONTROL DE MOVIMIENTO
+  
 
   //* funciones: ACCIONES Y MOVIMIENTOS
   drawBoy = () => {
@@ -42,3 +45,5 @@ class Boy {
     }
   };
 }
+
+
