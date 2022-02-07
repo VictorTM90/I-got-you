@@ -4,7 +4,7 @@ class Game {
     this.bg.src = "./img/fondo.png";
     this.boy = new Boy();
     this.grandMaArr = [new Grandma(150, "../img/grand-ma2.png")];
-    this.ballArr = [new Ball()]; 
+    this.ball= new Ball(); 
     this.isGameOver = false; 
   }
 
@@ -38,11 +38,12 @@ class Game {
     }
   };
 
-  //? SPAWN balones 
+  //? Control del spawn de balones 
   // spawnBall = (event) =>{
   //  let count = 0; 
   //  if (count > 8){
-    
+  //  this.ball.drawBall(); 
+  //  count = 0;
   //  }else if (event.key === "ArrowRight") {
   //   count ++; 
   // } else if (event.key === "ArrowLeft") {
@@ -124,11 +125,12 @@ class Game {
     this.grandMaArr.forEach((eachGrandMa) => {
       eachGrandMa.drawGrandMa();
     });
+    this.ball.drawBall(); 
 
-    this.ballArr.forEach((eachBall)=>{
-      eachBall.drawball()
-    }
-    )
+    // this.ballArr.forEach((eachBall)=>{
+    //   eachBall.drawball()
+    // }
+    // )
 
     
 
