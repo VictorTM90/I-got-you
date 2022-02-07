@@ -1,5 +1,5 @@
 class Grandma {
-    constructor(positionX,postionY){
+    constructor(postionY){
         this.x = positionX;
         this.y= postionY;
         this.width = 100;
@@ -16,9 +16,5 @@ class Grandma {
     moveGrandMa = () =>{
         this.x = this.x + 3;
     }
-
-
-
-
 
 }

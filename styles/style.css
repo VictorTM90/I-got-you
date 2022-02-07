@@ -31,6 +31,7 @@ body {
     flex-direction: column;
     justify-content: center;  
 }
+
 .container{
     background-color: rgb(222, 110, 130);
     display: flex; 
@@ -44,3 +45,4 @@ body {
 #canvas, #gameover-screen{
     display: none; 
 }
+

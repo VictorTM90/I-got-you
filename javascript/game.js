@@ -3,7 +3,8 @@ class Game {
     this.bg = new Image();
     this.bg.src = "./img/fondo.png";
     this.boy = new Boy();
-    this.grandMaArr = [new Grandma(0,150, "../img/grand-ma2.png")];
+    this.grandMaArr = [new Grandma(150, "../img/grand-ma2.png")];
+    this.ballArr = [new Ball()]; 
     this.isGameOver = false; 
   }
 
@@ -16,7 +17,14 @@ class Game {
   drawBackground = () => {
     ctx.drawImage(this.bg, 0, 0, canvas.width, canvas.height);
   };
-  //*spawn de abuelas aleatorio en dos carrilles
+ 
+  //funciones de control (time-interval and set timeOut)
+
+  
+
+ 
+ 
+  //*spawn de abuelas (BONUS: aleatorio en dos carrilles)
 
   spawnGrandMa = () => {
     let lastGrandMa = this.grandMaArr[this.grandMaArr.length - 1];
@@ -24,12 +32,29 @@ class Game {
       let randomY = Math.floor(Math.random()* 350)+ 150 //! ATENTO AL RESPONSIVE MEDIDAS!!!!!
       let newGrandma = new Grandma(randomY, "../img/grand-ma2.png");
       this.grandMaArr.push(newGrandma);
-    }
-    
+    } 
     if (this.grandMaArr.length > 10){
       this.grandMaArr.slice()
     }
   };
+
+  //? SPAWN balones 
+  // spawnBall = (event) =>{
+  //  let count = 0; 
+  //  if (count > 8){
+    
+  //  }else if (event.key === "ArrowRight") {
+  //   count ++; 
+  // } else if (event.key === "ArrowLeft") {
+  //   count ++;
+  // } else if (event.key === "ArrowUp") {
+  //   count ++;
+  // } else if (event.key === "ArrowDown") {
+  //   count ++;
+  // }
+   
+  //  controlar por tiempo. cada 15 seg. 
+  // }
   //eliminar las abuelas del array.
 
   boyLimitedMov = () => {
@@ -73,15 +98,18 @@ class Game {
     //MOVIMIENTOS Y ACCIONES
     //todo: Boy
     this.boyLimitedMov();
+   
     //todo: ABUELA
-    //* SPAWN
+    //* SPAWN 
     this.grandMaArr.forEach((eachGrandMa) => {
       eachGrandMa.moveGrandMa();
     });
     this.spawnGrandMa();
 
-    //todo: COLISIONES
+    //todo: BALL 
+    // this.spawnBall(); 
 
+    //todo: COLISIONES
     this.grandMaArr.forEach((eachGrandMaParam)=>{
       this.collisionBoyGrandMa(eachGrandMaParam);
     })
@@ -97,9 +125,19 @@ class Game {
       eachGrandMa.drawGrandMa();
     });
 
+    this.ballArr.forEach((eachBall)=>{
+      eachBall.drawball()
+    }
+    )
+
     
 
     // recursion para la animacion
-    requestAnimationFrame(this.gameLoop);
+   
+   if (!this.isGameOver){
+     requestAnimationFrame(this.gameLoop);
+   }
   };
 }
+
+

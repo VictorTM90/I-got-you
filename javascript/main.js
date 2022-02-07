@@ -22,6 +22,11 @@ const startGame = () =>{
 
 }
 
+const reStartGame = () => {
+    gameOverScreen.style.display = "none";
+    startGameScreen.style.display  = "flex";
+}
+
 
 
 
@@ -32,6 +37,10 @@ startButton.addEventListener("click", startGame );
 document.addEventListener ("keydown", (event)=>{
     // console.log (event.key)
      newGame.boy.moveBoy(event);
+     newGame.ball.spwanBall(event); 
 })
+
+let reStartButton = document.querySelector("#restart-btn"); 
+reStartButton.addEventListener("click", reStartGame); 
 
 
