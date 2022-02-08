@@ -1,6 +1,6 @@
 class Grandma {
     constructor(postionY){
-        this.x = 150;
+        this.x = 0;
         this.y= postionY;
         this.width = 100;
         this.height = 125;

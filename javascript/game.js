@@ -4,7 +4,7 @@ class Game {
     this.bg.src = "./img/fondo.png";
     this.boy = new Boy();
     this.grandMaArr = [new Grandma(150, "../img/grand-ma2.png")];
-    this.ball= new Ball(); 
+    this.ballArr= [new Ball(150,"../img/ball.png")]; 
     this.isGameOver = false; 
   }
 
@@ -38,25 +38,26 @@ class Game {
     }
   };
 
-  //? Control del spawn de balones 
-  // spawnBall = (event) =>{
-  //  let count = 0; 
-  //  if (count > 8){
-  //  this.ball.drawBall(); 
-  //  count = 0;
-  //  }else if (event.key === "ArrowRight") {
-  //   count ++; 
-  // } else if (event.key === "ArrowLeft") {
-  //   count ++;
-  // } else if (event.key === "ArrowUp") {
-  //   count ++;
-  // } else if (event.key === "ArrowDown") {
-  //   count ++;
-  // }
-   
-  //  controlar por tiempo. cada 15 seg. 
-  // }
-  //eliminar las abuelas del array.
+
+
+  //! Control del spawn de balones 
+//   spawnBall = (event) =>{
+//    let count = 0; 
+//    if (count > 8){
+//    this.ball.drawBall(); 
+//    count = 0;
+//    } else if (event.key === "ArrowRight") {
+//     count ++; 
+//   } else if (event.key === "ArrowLeft") {
+//     count ++;
+//   } else if (event.key === "ArrowUp") {
+//     count ++;
+//   } else if (event.key === "ArrowDown") {
+//     count ++;
+//   }
+// }
+  //? controlar por tiempo. cada 15 seg. 
+  //?eliminar las abuelas del array.
 
   boyLimitedMov = () => {
     if (this.boy.x > canvas.width - this.boy.width) {
@@ -87,6 +88,47 @@ class Game {
 
     }
   }
+  
+  collisionBallBoy = (eachBall, i)=>{ 
+   
+    if (this.boy.x < eachBall.x + eachBall.width &&
+      this.boy.x + this.boy.width> eachBall.x &&
+      this.boy.y< eachBall.y + eachBall.height &&
+      this.boy.height + this.boy.y> eachBall.y)
+      
+      {
+        console.log("sumo 5pts")
+        
+        this.ballArr.splice(this.ballArr[i],1); 
+        
+        this.ballArr.push(new Ball(150,"../img/ball.png"));
+
+
+        
+        // this.ball.clearBall();
+        //*Dibujar el +5
+          //drawFive();
+        //*limpiar el balon 
+          //clearBall (); 
+
+        //*dibujar otro balon
+        // spawnBall = ()=>{
+        // let lastBall = this.ballArr[this.ballArr.length -1 ]; 
+        // if ( abb= c )
+        // 
+        // let newBall = new Ball (posXrandom, posYrandom)  
+        // this.ballArr.push(newBall); 
+        // }
+        
+      
+        //drawBall
+
+
+     
+     
+      }
+
+  }
 
   //?
 
@@ -114,23 +156,29 @@ class Game {
     this.grandMaArr.forEach((eachGrandMaParam)=>{
       this.collisionBoyGrandMa(eachGrandMaParam);
     })
-
     
-    //*MOVE
+    this.ballArr.forEach((eachBall,i)=>{
+      this.collisionBallBoy(eachBall,i);
+    })
+
 
     // dibujar elementos
 
     this.drawBackground();
     this.boy.drawBoy();
+
+    // this.ball.drawBall(); 
+    
     this.grandMaArr.forEach((eachGrandMa) => {
       eachGrandMa.drawGrandMa();
     });
-    this.ball.drawBall(); 
-
-    // this.ballArr.forEach((eachBall)=>{
-    //   eachBall.drawball()
-    // }
-    // )
+    
+    
+    
+    this.ballArr.forEach((eachBall)=>{
+      eachBall.drawBall();
+    })
+    
 
     
 

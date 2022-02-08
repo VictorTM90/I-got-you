@@ -1,16 +1,19 @@
 body {
     margin: 0;
     background-color: rgb(222, 110, 130);
+    align-items: center; 
     
 }
-
-
+#titulo-principal {
+    display:flex;
+    align-content: center;
+    justify-content: center;
+    position:static;
+}
 
 #canvas {
     background-color: lightgray;
 }
-
-
 
 #start-game-btn, #restart-btn{
     background-color: rgb(110, 218, 222);
@@ -32,6 +35,7 @@ body {
     justify-content: center;  
 }
 
+
 .container{
     background-color: rgb(222, 110, 130);
     display: flex; 
@@ -42,7 +46,11 @@ body {
 
 }
 
+
 #canvas, #gameover-screen{
     display: none; 
 }
 
+#start-game {
+    margin-top: 0px;
+}
