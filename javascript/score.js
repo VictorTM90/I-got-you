@@ -1,4 +1,4 @@
-class Score {
+class Five {
     constructor (){
         this.x = Math.floor(Math.random()* canvas.width);
         this.y = Math.floor(Math.random()* 350)+ 150;
@@ -8,7 +8,7 @@ class Score {
         this.img.src = "../img/puntuacion.png"
     }
 
-    drawScore =()=>{
+    drawFive=()=>{
         ctx.drawImage (this.img, this.x, this.y, this.width, this.height); 
     }
 

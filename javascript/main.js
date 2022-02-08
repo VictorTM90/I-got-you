@@ -8,6 +8,10 @@ let ctx = canvas.getContext("2d")
 let newGame; 
 
 
+//!Canviar el h3 aquí? 
+ let newScore = document.querySelector ("#total-score span")
+
+
 //* FUNCTIONS TO MANEGE STATES GAMES    
 
 const startGame = () =>{
@@ -30,6 +34,7 @@ const reStartGame = () => {
 
 
 
+
 //* ADD EVENTS LISTENERS
 let startButton = document.querySelector("#start-game-btn");
 startButton.addEventListener("click", startGame );
@@ -37,8 +42,9 @@ startButton.addEventListener("click", startGame );
 document.addEventListener ("keydown", (event)=>{
     // console.log (event.key)
     newGame.boy.moveBoy(event);
-    newGame.spawnScore(event); 
+    newGame.spawnFive(event); 
 });
+
 
 
 

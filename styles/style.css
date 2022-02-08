@@ -1,3 +1,8 @@
+@font-face {
+    font-family: beatFont;
+    src: url("/font-family/BeatWordDemo-nRL20.ttf");
+}
+
 body {
     margin: 0;
     background-color: rgb(222, 110, 130);
@@ -8,7 +13,13 @@ body {
     display:flex;
     align-content: center;
     justify-content: center;
-    position:static;
+    font-family: beatFont;
+    font-size: 5em;
+    margin-top: 30px;
+    margin-bottom: 0px;
+    color:rgb(255, 255, 255)
+
+   
 }
 
 #canvas {
@@ -24,10 +35,13 @@ body {
     border-radius: 10px;
     font-family: 'Franklin Gothic Medium';
     
-
-    
 }
 
+ h3 {
+     font-family: beatFont;
+     color: rgb(71, 212, 125);
+     font-size: 4em;
+}
 
 #front-img{
     display: flex;
@@ -42,10 +56,12 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 50px;
+    margin: 0px, 50px, 50px, 50px;
 
 }
-
+#total-score{
+    margin: 10px;
+}
 
 #canvas, #gameover-screen{
     display: none; 

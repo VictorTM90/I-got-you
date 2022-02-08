@@ -5,12 +5,15 @@ class Game {
     this.boy = new Boy();
     this.grandMaArr = [new Grandma(150, "../img/grand-ma2.png")];
     this.ballArr = [new Ball(150, "../img/ball.png")];
-    this.scoreArr = [];
+    this.fiveArr = [];
     this.count =0;
+    this.score = 0;
     this.isGameOver = false;
   }
 
   // *FUNCIONES
+  
+  //? Función de Score 
 
   //? El background: Dibujar y limpiar.
   clearBackground = () => {
@@ -20,9 +23,7 @@ class Game {
     ctx.drawImage(this.bg, 0, 0, canvas.width, canvas.height);
   };
 
-  //funciones de control (time-interval and set timeOut)
-
-  //*spawn de abuelas (BONUS: aleatorio en dos carrilles)
+  //*SPAWN (BONUS: aleatorio en dos carrilles)
 
   spawnGrandMa = () => {
     let lastGrandMa = this.grandMaArr[this.grandMaArr.length - 1];
@@ -36,24 +37,20 @@ class Game {
     }
   };
 
-  //! Control del spawn de balones
-  spawnScore = (event) => {
+  //! Control del spawn de 5five
+  spawnFive = (event) => {
     
     if (this.count >= 25) {
-      this.scoreArr = [new Score ()];
-      console.log(this.scoreArr)
+      this.fiveArr.push(new Five())
       this.count = 0;
     } else if (event.key === "ArrowRight" || event.key === "ArrowLeft" || event.key === "ArrowUp" || event.key === "ArrowDown") {
       this.count++;
     } 
   };
   
-  //?eliminar las abuelas del array.
 
 
-
-
-
+//*move Boy
   boyLimitedMov = () => {
     if (this.boy.x > canvas.width - this.boy.width) {
       this.boy.x = canvas.width - this.boy.width;
@@ -66,7 +63,7 @@ class Game {
     }
   };
 
-  // collisiones
+  //* Colisiones
 
   collisionBoyGrandMa = (eachGrandMaParam) => {
     if (
@@ -91,22 +88,30 @@ class Game {
       this.ballArr.splice(this.ballArr[i], 1);
 
       this.ballArr.push(new Ball(150));
-
+      
+      //! implementar el score total
+      this.score = this.score + 1
+      newScore.innerText = this.score 
     }
   };
 
-  collisionScoreBoy = (eachFive, i) =>{
+  collisionFiveBoy = (eachFive, i) =>{
     if (
       this.boy.x < eachFive.x + eachFive.width &&
       this.boy.x + this.boy.width > eachFive.x &&
       this.boy.y < eachFive.y + eachFive.height &&
       this.boy.height + this.boy.y > eachFive.y
     ){
-      this.scoreArr.splice(this.scoreArr[i],1);
+      this.fiveArr.splice(this.fiveArr[i],1);
+     
+     //!implementar el score total
+      this.score = this.score + 5
+      newScore.innerText = this.score 
     }
   }
 
-  //?
+
+  //todo :GAMELOOP 
 
   gameLoop = () => {
     // console.log ("el juego funciona?")
@@ -137,8 +142,8 @@ class Game {
       this.collisionBallBoy(eachBall, i);
     });
 
-    this.scoreArr.forEach((eachFive)=>{
-      this.collisionScoreBoy(eachFive)
+    this.fiveArr.forEach((eachFive)=>{
+      this.collisionFiveBoy(eachFive)
     })
 
     // dibujar elementos
@@ -156,11 +161,11 @@ class Game {
 
     // ESTO SOLO VA A FUNCIONAR CUANDO SCORE TENGA VALOR
 
-    this.scoreArr.forEach((eachFive)=>{
-      eachFive.drawScore();
+    this.fiveArr.forEach((eachFive)=>{
+      eachFive.drawFive();
     })
 
-    //this.scoreArr.forEach((eachScore)=>{
+    //this.fiveArr.forEach((eachScore)=>{
     //eachScore.drawScore()
     //})
 
