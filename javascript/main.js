@@ -36,9 +36,11 @@ startButton.addEventListener("click", startGame );
 
 document.addEventListener ("keydown", (event)=>{
     // console.log (event.key)
-     newGame.boy.moveBoy(event);
-    //  newGame.spawnBall(event); 
-})
+    newGame.boy.moveBoy(event);
+    newGame.spawnScore(event); 
+});
+
+
 
 let reStartButton = document.querySelector("#restart-btn"); 
 reStartButton.addEventListener("click", reStartGame); 
