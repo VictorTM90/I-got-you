@@ -27,7 +27,7 @@ class Game {
 
   spawnGrandMa = () => {
     let lastGrandMa = this.grandMaArr[this.grandMaArr.length - 1];
-    if (lastGrandMa.x > canvas.width - 550) {
+    if (lastGrandMa.x > canvas.width /2) {
       let randomY = Math.floor(Math.random() * 350) + 150; //! ATENTO AL RESPONSIVE MEDIDAS!!!!!
       let newGrandma = new Grandma(randomY, "../img/grand-ma2.png");
       this.grandMaArr.push(newGrandma);

@@ -1,6 +1,6 @@
 class Five {
     constructor (){
-        this.x = Math.floor(Math.random()* canvas.width);
+        this.x = Math.floor(Math.random()* canvas.width-50);
         this.y = Math.floor(Math.random()* 350)+ 150;
         this.width= 50;
         this.height= 50;
