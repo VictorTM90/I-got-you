@@ -120,10 +120,10 @@ class Game {
 
   collisionBallBoy = (eachBall, i) => {
     if (
-      this.boy.x < eachBall.x + eachBall.width &&
+      this.boy.x < eachBall.x + eachBall.width / 2  &&
       this.boy.x + this.boy.width > eachBall.x &&
-      this.boy.y < eachBall.y + eachBall.height &&
-      this.boy.height + this.boy.y > eachBall.y
+      this.boy.y < eachBall.y + eachBall.height /1.2 &&
+      this.boy.height /1.2 + this.boy.y > eachBall.y
     ) {
       this.ballArr.splice(this.ballArr[i], 1);
 

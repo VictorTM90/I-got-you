@@ -9,7 +9,7 @@ let newGame;
 
 
 
-//!Canviar el h3 aquí? 
+//*Selector del score. 
  let newScore = document.querySelector ("#total-score span")
 
 
@@ -18,9 +18,12 @@ let newGame;
 const startGame = () =>{
     // desaparece screen start
     startGameScreen.style.display = "none";
-   // aparece el juego
+   
+    // aparece el juego y la puntuación. 
     canvas.style.display = "flex" ; 
+
     // se inicia el juego 
+   
     newGame = new Game();
    
     newGame.audio.play(); 

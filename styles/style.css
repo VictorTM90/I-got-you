@@ -37,7 +37,8 @@ body {
     
 }
 
- h3 {
+
+h3 {
      font-family: beatFont;
      color: rgb(71, 212, 125);
      font-size: 4em;
@@ -63,7 +64,7 @@ body {
     margin: 10px;
 }
 
-#canvas, #gameover-screen{
+#canvas, #gameover-screen {
     display: none; 
 }
 

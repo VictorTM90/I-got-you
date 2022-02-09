@@ -1,6 +1,6 @@
 class Ball {
     constructor () {
-        this.x = Math.floor(Math.random()* (canvas.width-60)+60);
+        this.x = Math.floor(Math.random()* (canvas.width-200))+100;
         this.y = Math.floor(Math.random()* 350)+ 150; 
         this.width = 35; 
         this.height = 35;
