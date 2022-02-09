@@ -32,15 +32,15 @@ class Boy {
 
   moveBoy = (event) => {
     if (event.key === "ArrowRight") {
-      this.x = this.x + 50;
+      this.x = this.x + 45;
       this.img.src = "./img/run-boy.png"
     } else if (event.key === "ArrowLeft") {
-      this.x = this.x - 50;
+      this.x = this.x - 45;
       this.img.src = "./img/run-boy-left.png"
     } else if (event.key === "ArrowUp") {
-      this.y = this.y - 50;
+      this.y = this.y - 45;
     } else if (event.key === "ArrowDown") {
-      this.y = this.y + 50;
+      this.y = this.y + 45;
     }
   };
 }

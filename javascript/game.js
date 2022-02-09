@@ -127,8 +127,10 @@ class Game {
     //* SPAWN
     this.grandMaArr.forEach((eachGrandMa) => {
       eachGrandMa.moveGrandMa();
-      if (this.score > 15){
-        eachGrandMa.moveGrandMa
+      if (this.score > 12){
+        eachGrandMa.moveGrandMa(6)
+      } else if (this.score >= 20){
+        eachGrandMa.moveGrandMa(3)
       }
     });
     this.spawnGrandMa();
