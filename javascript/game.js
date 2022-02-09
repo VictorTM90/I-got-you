@@ -2,18 +2,29 @@ class Game {
   constructor() {
     this.bg = new Image();
     this.bg.src = "./img/fondo.png";
+   
+    this.audio = new Audio ("../sounds/Inicio.mp3")
+   
+   
     this.boy = new Boy();
-    this.grandMaArr = [new Grandma(150, "../img/grand-ma2.png")];
-    this.ballArr = [new Ball(150, "../img/ball.png")];
+    this.grandMaArr = [new Grandma(150)];
+    this.zapatillaArr = [new Zapatilla(150)];
+  
+    this.ballArr = [new Ball(150)];
     this.fiveArr = [];
-    this.count =0;
+
+    this.count = 0;
     this.score = 0;
+
+    this.positionX = 0;
+    this.positionY = 0;
+    
     this.isGameOver = false;
   }
 
   // *FUNCIONES
-  
-  //? Función de Score 
+
+  //? Función de Score
 
   //? El background: Dibujar y limpiar.
   clearBackground = () => {
@@ -27,30 +38,58 @@ class Game {
 
   spawnGrandMa = () => {
     let lastGrandMa = this.grandMaArr[this.grandMaArr.length - 1];
-    if (lastGrandMa.x > canvas.width /2) {
-      let randomY = Math.floor(Math.random() * 350) + 150; //! ATENTO AL RESPONSIVE MEDIDAS!!!!!
-      let newGrandma = new Grandma(randomY);
-      this.grandMaArr.push(newGrandma);
+    if (lastGrandMa.x > canvas.width / 2) {
+      // let randomY = Math.floor(Math.random() * 350) + 150; //! ATENTO AL RESPONSIVE MEDIDAS!!!!!
+      let newGrandma = new Grandma();
+
+      // console.log (newGrandma)
+
+      //! pk no funciona, estoy accediendo a la nueva instancia ??
+      this.positionX = newGrandma.x;
+      this.positionY = newGrandma.y;
+
+      //console.log (newGrandma.y,   newGrandma.x)
+
+      this.grandMaArr.push(newGrandma); // sacar fuera con variable
+      this.spawnZapatilla(); // ejecutar la funcion a la vez
     }
+
     if (this.grandMaArr.length > 10) {
       this.grandMaArr.slice();
     }
   };
 
+  spawnZapatilla = () => {
+    // segun score
+    if (this.score > 10) {
+      let postParamX = this.positionX + 40;
+      let postParamY = this.positionY + 40;
+      // crear zapatilla  // agregar a la arr
+      let newZapatilla = new Zapatilla(postParamX, postParamY);
+
+      this.zapatillaArr.push(newZapatilla);
+    }
+    
+  };
+
+  //? Mover y  dibujar zapatillas
+
   //! Control del spawn de 5five
   spawnFive = (event) => {
-    
     if (this.count >= 25) {
-      this.fiveArr.push(new Five())
+      this.fiveArr.push(new Five());
       this.count = 0;
-    } else if (event.key === "ArrowRight" || event.key === "ArrowLeft" || event.key === "ArrowUp" || event.key === "ArrowDown") {
+    } else if (
+      event.key === "ArrowRight" ||
+      event.key === "ArrowLeft" ||
+      event.key === "ArrowUp" ||
+      event.key === "ArrowDown"
+    ) {
       this.count++;
-    } 
+    }
   };
-  
 
-
-//*move Boy
+  //*move Boy
   boyLimitedMov = () => {
     if (this.boy.x > canvas.width - this.boy.width) {
       this.boy.x = canvas.width - this.boy.width;
@@ -69,9 +108,10 @@ class Game {
     if (
       this.boy.x < eachGrandMaParam.x + eachGrandMaParam.width / 2 &&
       this.boy.x + this.boy.width / 2 > eachGrandMaParam.x &&
-      this.boy.y < eachGrandMaParam.y + eachGrandMaParam.height / 1.25 &&
-      this.boy.height / 1.25 + this.boy.y > eachGrandMaParam.y
+      this.boy.y < eachGrandMaParam.y + eachGrandMaParam.height / 1.3 &&
+      this.boy.height / 1.3 + this.boy.y > eachGrandMaParam.y
     ) {
+      this.audio.pause();
       this.isGameOver = true;
       canvas.style.display = "none";
       gameOverScreen.style.display = "flex";
@@ -88,34 +128,48 @@ class Game {
       this.ballArr.splice(this.ballArr[i], 1);
 
       this.ballArr.push(new Ball(150));
-      
+
+     // this.ball.audioBall(); 
+
       //! implementar el score total
-      this.score = this.score + 1
-      newScore.innerText = this.score 
+      this.score = this.score + 1;
+      newScore.innerText = this.score;
     }
   };
 
-  collisionFiveBoy = (eachFive, i) =>{
+  collisionFiveBoy = (eachFive, i) => {
     if (
       this.boy.x < eachFive.x + eachFive.width &&
       this.boy.x + this.boy.width > eachFive.x &&
       this.boy.y < eachFive.y + eachFive.height &&
       this.boy.height + this.boy.y > eachFive.y
-    ){
-      this.fiveArr.splice(this.fiveArr[i],1);
-     
-     //!implementar el score total
-      this.score = this.score + 5
-      newScore.innerText = this.score 
+    ) {
+      this.fiveArr.splice(this.fiveArr[i], 1);
+      
+      //!implementar el score total
+      this.score = this.score + 5;
+      newScore.innerText = this.score;
     }
-  }
+  };
 
+  collisionZapatilla = (eachZapatillaParam) => {
+    if (
+      this.boy.x < eachZapatillaParam.x + eachZapatillaParam.width  &&
+      this.boy.x + this.boy.width / 2 > eachZapatillaParam.x &&
+      this.boy.y < eachZapatillaParam.y + eachZapatillaParam.height  &&
+      this.boy.height / 1.3 + this.boy.y > eachZapatillaParam.y
+    ) {
+      this.audio.pause();
+      this.isGameOver = true;
+      canvas.style.display = "none";
+      gameOverScreen.style.display = "flex";
+    }
+  };
 
-  //todo :GAMELOOP 
+  //todo :GAMELOOP
 
   gameLoop = () => {
-    // console.log ("el juego funciona?")
-
+    
     //limpiar el canvas
     this.clearBackground();
 
@@ -126,30 +180,38 @@ class Game {
     //todo: ABUELA
     //* SPAWN
     this.grandMaArr.forEach((eachGrandMa) => {
-      eachGrandMa.moveGrandMa();
-      if (this.score > 12){
-        eachGrandMa.moveGrandMa(6)
-      } else if (this.score >= 20){
-        eachGrandMa.moveGrandMa(3)
+      if (this.score > 5 && this.score < 25) {
+        eachGrandMa.moveGrandMa(6);
+      } else {
+        eachGrandMa.moveGrandMa(3);
       }
     });
+
     this.spawnGrandMa();
 
-    //todo: BALL
-    // this.spawnBall();
+    //todo: Zapatilla
+    this.zapatillaArr.forEach((eachZapatilla) => {
+      eachZapatilla.moveZapatilla();
+    });
+
+    // this.spawnZapatilla();
 
     //todo: COLISIONES
     this.grandMaArr.forEach((eachGrandMaParam) => {
       this.collisionBoyGrandMa(eachGrandMaParam);
     });
 
+    this.zapatillaArr.forEach((eachZapatillaParam) => {
+      this.collisionZapatilla(eachZapatillaParam);
+    });
+
     this.ballArr.forEach((eachBall, i) => {
       this.collisionBallBoy(eachBall, i);
     });
 
-    this.fiveArr.forEach((eachFive)=>{
-      this.collisionFiveBoy(eachFive)
-    })
+    this.fiveArr.forEach((eachFive) => {
+      this.collisionFiveBoy(eachFive);
+    });
 
     // dibujar elementos
 
@@ -160,15 +222,20 @@ class Game {
       eachGrandMa.drawGrandMa();
     });
 
+    //solo va a funcionar cuando el score supere los 20
+    this.zapatillaArr.forEach((eachZapatilla) => {
+      eachZapatilla.drawZapatilla();
+    });
+
     this.ballArr.forEach((eachBall) => {
       eachBall.drawBall();
     });
 
     // ESTO SOLO VA A FUNCIONAR CUANDO SCORE TENGA VALOR
 
-    this.fiveArr.forEach((eachFive)=>{
+    this.fiveArr.forEach((eachFive) => {
       eachFive.drawFive();
-    })
+    });
 
     //this.fiveArr.forEach((eachScore)=>{
     //eachScore.drawScore()
@@ -178,6 +245,7 @@ class Game {
 
     if (!this.isGameOver) {
       requestAnimationFrame(this.gameLoop);
+      
     }
   };
 }

@@ -8,6 +8,7 @@ let ctx = canvas.getContext("2d")
 let newGame; 
 
 
+
 //!Canviar el h3 aquí? 
  let newScore = document.querySelector ("#total-score span")
 
@@ -21,8 +22,16 @@ const startGame = () =>{
     canvas.style.display = "flex" ; 
     // se inicia el juego 
     newGame = new Game();
-    
+   
+    newGame.audio.play(); 
+    newGame.audio.loop = true;
+    newGame.audio.volume = 0.1;
+
+   
     newGame.gameLoop();
+   
+    
+
 
 }
 

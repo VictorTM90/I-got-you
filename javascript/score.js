@@ -6,6 +6,8 @@ class Five {
         this.height= 50;
         this.img = new Image ();
         this.img.src = "./img/puntuacion.png"
+
+        this.audio = "../sounds/cartoon_wink_magic_sparkle-6896.mp3"
     }
 
     drawFive=()=>{

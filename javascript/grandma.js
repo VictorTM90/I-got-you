@@ -1,7 +1,7 @@
 class Grandma {
-    constructor(postionY){
+    constructor(){
         this.x = 0;
-        this.y= postionY;
+        this.y= Math.floor(Math.random() * 350) + 150;
         this.width = 100;
         this.height = 125;
         this.img = new Image ();
@@ -15,7 +15,7 @@ class Grandma {
     }
     
     moveGrandMa = (spaceMoveParam) =>{
-        spaceMoveParam = 3
+        
         this.x = this.x + spaceMoveParam;
     }
 
