@@ -3,7 +3,7 @@ class Game {
     this.bg = new Image();
     this.bg.src = "./img/fondo.png";
 
-    this.audio = new Audio("../sounds/Inicio.mp3");
+    this.audio = new Audio("./sounds/Inicio.mp3");
 
     this.boy = new Boy();
     this.grandMaArr = [new Grandma(150)];
@@ -240,7 +240,7 @@ class Game {
 
     //todo: Zapatilla
     this.zapatillaArr.forEach((eachZapatilla) => {
-      if (this.score >= 40) {
+      if (this.score >= 30) {
         eachZapatilla.moveDiagonalZapatilla();
 
         
