@@ -8,10 +8,12 @@ class Game {
    
     this.boy = new Boy();
     this.grandMaArr = [new Grandma(150)];
-    this.zapatillaArr = [new Zapatilla(150)];
-  
+    this.zapatillaArr = [];
+    
     this.ballArr = [new Ball(150)];
     this.fiveArr = [];
+
+    this.lifeArr = [new life(20), new life(85), new life(145)];
 
     this.count = 0;
     this.score = 0;
@@ -39,24 +41,41 @@ class Game {
   spawnGrandMa = () => {
     let lastGrandMa = this.grandMaArr[this.grandMaArr.length - 1];
     if (lastGrandMa.x > canvas.width / 2) {
-      // let randomY = Math.floor(Math.random() * 350) + 150; //! ATENTO AL RESPONSIVE MEDIDAS!!!!!
-      let newGrandma = new Grandma();
+      //crea una nueva abuela; 
 
-      // console.log (newGrandma)
+      let newGrandma = new Grandma();
 
       //! pk no funciona, estoy accediendo a la nueva instancia ??
       this.positionX = newGrandma.x;
       this.positionY = newGrandma.y;
 
-      //console.log (newGrandma.y,   newGrandma.x)
+     
 
-      this.grandMaArr.push(newGrandma); // sacar fuera con variable
-      this.spawnZapatilla(); // ejecutar la funcion a la vez
+      this.grandMaArr.push(newGrandma); 
+      this.spawnZapatilla();  // ejecutar la funcion a la vez
+
+      
     }
 
     if (this.grandMaArr.length > 10) {
       this.grandMaArr.slice();
     }
+    
+
+    // abuela alternativa => IDEA, PERO DONDE SE EJECUTA ? CÓMO INTERVIENE EN EL LOOP Y CON EL MOVE??  
+
+    // if (this.score > 10){
+    //   this.grandMaArr.forEach((eachGrandamParam, i)=>{
+    //     if (i % 2 === 0){
+    //     this.eachGrandamParam.x = canvas.width 
+    //     this.eachGrandamParam.moveGrandMa(-3)
+    //   }
+    //   }); 
+    // }
+
+
+
+
   };
 
   spawnZapatilla = () => {
@@ -66,9 +85,11 @@ class Game {
       let postParamY = this.positionY + 40;
       // crear zapatilla  // agregar a la arr
       let newZapatilla = new Zapatilla(postParamX, postParamY);
-
       this.zapatillaArr.push(newZapatilla);
+      
+      newZapatilla.audioZapatilla();
     }
+    
     
   };
 
@@ -146,23 +167,46 @@ class Game {
     ) {
       this.fiveArr.splice(this.fiveArr[i], 1);
       
+      eachFive.audioFive(); 
+
       //!implementar el score total
       this.score = this.score + 5;
       newScore.innerText = this.score;
     }
   };
 
-  collisionZapatilla = (eachZapatillaParam) => {
+  collisionZapatilla = (eachZapatillaParam, i) => {
     if (
       this.boy.x < eachZapatillaParam.x + eachZapatillaParam.width  &&
-      this.boy.x + this.boy.width / 2 > eachZapatillaParam.x &&
+      this.boy.x + this.boy.width   > eachZapatillaParam.x &&
       this.boy.y < eachZapatillaParam.y + eachZapatillaParam.height  &&
-      this.boy.height / 1.3 + this.boy.y > eachZapatillaParam.y
+      this.boy.height  + this.boy.y > eachZapatillaParam.y
     ) {
-      this.audio.pause();
-      this.isGameOver = true;
-      canvas.style.display = "none";
-      gameOverScreen.style.display = "flex";
+    //   console.log(this.lifeArr);
+           
+    //   this.zapatillaArr.splice(this.zapatillaArr[i], 1);
+    //   //this.lifeArr.splice(this.lifeArr[1], 1);
+    //   //console.log(this.lifeArr)
+     
+    //   console.log(this.lifeArr); 
+     
+      
+    //   setTimeout(() => {
+    //    this.lifeArr.pop();
+    //   }, 500);
+
+    //   console.log(this.lifeArr); 
+
+     
+
+
+    //   if(this.lifeArr.length === 0){
+
+    //     this.audio.pause();
+    //     this.isGameOver = true;
+    //     canvas.style.display = "none";
+    //     gameOverScreen.style.display = "flex";
+    //  }
     }
   };
 
@@ -173,7 +217,7 @@ class Game {
     //limpiar el canvas
     this.clearBackground();
 
-    //MOVIMIENTOS Y ACCIONES
+    //*-------------------------------------------------------------------------------MOVIMIENTOS Y ACCIONES
     //todo: Boy
     this.boyLimitedMov();
 
@@ -191,12 +235,16 @@ class Game {
 
     //todo: Zapatilla
     this.zapatillaArr.forEach((eachZapatilla) => {
+      if (this.score > 20 ){
+        eachZapatilla.moveDigonalZapatilla(); 
+      }
       eachZapatilla.moveZapatilla();
+      
     });
 
     // this.spawnZapatilla();
 
-    //todo: COLISIONES
+   //*------------------------------------------------------------COLISIONES--------------------------------------------------------
     this.grandMaArr.forEach((eachGrandMaParam) => {
       this.collisionBoyGrandMa(eachGrandMaParam);
     });
@@ -213,17 +261,19 @@ class Game {
       this.collisionFiveBoy(eachFive);
     });
 
-    // dibujar elementos
+    //------------------------------------------------dibujar elementos---------------------------------------------------------------->
 
     this.drawBackground();
     this.boy.drawBoy();
+    // this.life.drawlife();
+
 
     this.grandMaArr.forEach((eachGrandMa) => {
       eachGrandMa.drawGrandMa();
     });
 
     //solo va a funcionar cuando el score supere los 20
-    this.zapatillaArr.forEach((eachZapatilla) => {
+    this.zapatillaArr.forEach((eachZapatilla, i) => {
       eachZapatilla.drawZapatilla();
     });
 
@@ -231,15 +281,17 @@ class Game {
       eachBall.drawBall();
     });
 
+   this.lifeArr.forEach((eachlife)=>{
+     eachlife.drawLife(); 
+   })
+    
     // ESTO SOLO VA A FUNCIONAR CUANDO SCORE TENGA VALOR
 
     this.fiveArr.forEach((eachFive) => {
       eachFive.drawFive();
     });
 
-    //this.fiveArr.forEach((eachScore)=>{
-    //eachScore.drawScore()
-    //})
+   
 
     // recursion para la animacion
 

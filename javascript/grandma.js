@@ -19,4 +19,5 @@ class Grandma {
         this.x = this.x + spaceMoveParam;
     }
 
+    
 }

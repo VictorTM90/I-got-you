@@ -29,6 +29,7 @@ const startGame = () =>{
     newGame.audio.play(); 
     newGame.audio.loop = true;
     newGame.audio.volume = 0.1;
+    newScore.innerText = 0;
 
    
     newGame.gameLoop();
