@@ -68,13 +68,12 @@ class Game {
 
   spawnZapatilla = () => {
     // segun score
-    if (this.score > 10) {
+    if (this.score > 20) {
       let postParamX = this.positionX + 40;
       let postParamY = this.positionY + 40;
       // crear zapatilla  // agregar a la arr
       let newZapatilla = new Zapatilla(postParamX, postParamY);
       this.zapatillaArr.push(newZapatilla);
-
       newZapatilla.audioZapatilla();
     }
   };
@@ -174,21 +173,8 @@ class Game {
       
 
       this.lifeArr.pop();
-
-
       
-      this.boy.increseMov = 20; 
-
-      setTimeout (()=>{
-        this.boy.increseMove = 45; 
-        },500)
-  
-    
-    
-        console.log (this.boy)
-
-     
-     
+      
         if(this.lifeArr.length === 0){
 
           this.audio.pause();
@@ -212,9 +198,9 @@ class Game {
     //todo: ABUELA
     //* SPAWN Y MOVE
     this.grandMaArr.forEach((eachGrandMa) => {
-      if (this.score > 10 && this.score < 25) {
+     if (this.score >= 30) {
         eachGrandMa.moveGrandMa(6);
-      } else if (this.score > 35) {
+      }  else if (this.score > 10 && this.score < 30) {
         eachGrandMa.moveGrandMa(6);
       } else if (this.score <= 10) {
         eachGrandMa.moveGrandMa(3);
@@ -225,7 +211,7 @@ class Game {
 
     //todo: Zapatilla
     this.zapatillaArr.forEach((eachZapatilla) => {
-      if (this.score > 20) {
+      if (this.score >= 40) {
         eachZapatilla.moveDiagonalZapatilla();
 
         

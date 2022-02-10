@@ -6,7 +6,7 @@ class Ball {
         this.height = 35;
         this.img = new Image();
         this.img.src = "./img/ball.png"
-        this.audio = "../sounds/mixkit-catching-a-basketball-ball-2081.wav"
+       // this.audio = "../sounds/mixkit-catching-a-basketball-ball-2081.wav"
     }
 
     drawBall = () =>{  
@@ -19,13 +19,13 @@ class Ball {
         ctx.clearImage (this.img, this.x, this.y, this.width, this.height);
     }
 
-    audioBall = () =>{
-       // this.audio.volume = ;
-        this.audio.play();
+    // audioBall = () =>{
+    //    // this.audio.volume = ;
+    //     this.audio.play();
       
-        setTimeout(() => {
-            this.audio.pause()
-        }, 3);
-    } 
+    //     setTimeout(() => {
+    //         this.audio.pause()
+    //     }, 3);
+    // } 
 
 }
