@@ -30,7 +30,12 @@ class Boy {
       this.y = this.y - this.increseMov;
     } else if (event.key === "ArrowDown") {
       this.y = this.y + this.increseMov;
+    } else if (event.key === "Shift" ){
+      this.x = this.x + this.increseMov + 75; 
+  
     }
+
+
   };
 
 

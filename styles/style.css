@@ -41,7 +41,12 @@ body {
 h3 {
      font-family: beatFont;
      color: rgb(71, 212, 125);
-     font-size: 4em;
+     font-size: 3em;
+}
+#score {
+    display: flex; 
+    flex-direction: row;
+    justify-content: center;
 }
 
 #front-img{
@@ -63,6 +68,13 @@ h3 {
 #total-score{
     margin: 10px;
 }
+
+span{
+    color:rgb(255, 255, 255)
+}
+#your-score{
+    margin: 10px;
+} 
 
 #canvas, #gameover-screen {
     display: none; 

@@ -7,11 +7,12 @@ let canvas = document.querySelector("#canvas")
 let ctx = canvas.getContext("2d")
 let newGame; 
 
+let maxScore; 
 
 
 //*Selector del score. 
- let newScore = document.querySelector ("#total-score span")
-
+ let maxScoreDOM = document.querySelector ("#total-score span")
+ let yourScoreDOM = document.querySelector ("#your-score span")
 
 //* FUNCTIONS TO MANEGE STATES GAMES    
 
@@ -29,9 +30,9 @@ const startGame = () =>{
     newGame.audio.play(); 
     newGame.audio.loop = true;
     newGame.audio.volume = 0.1;
-    newScore.innerText = 0;
-
    
+    yourScoreDOM.innerText = 0; 
+    
     newGame.gameLoop();
    
     
@@ -53,7 +54,7 @@ let startButton = document.querySelector("#start-game-btn");
 startButton.addEventListener("click", startGame );
 
 document.addEventListener ("keydown", (event)=>{
-
+    console.log (event)
     newGame.boy.moveBoy(event);
     newGame.spawnFive(event); 
 });

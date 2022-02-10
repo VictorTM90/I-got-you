@@ -15,8 +15,11 @@ class Game {
     this.lifeArr = [new life(20), new life(85), new life(145)];
 
     this.count = 0;
+    
     this.score = 0;
-
+    this.maxScore = 0;
+   
+   
     this.positionX = 0;
     this.positionY = 0;
 
@@ -32,6 +35,19 @@ class Game {
   drawBackground = () => {
     ctx.drawImage(this.bg, 0, 0, canvas.width, canvas.height);
   };
+
+ //* SCORE 
+
+  comparationScore = () =>{
+    this.score = this.maxScore
+    if (this.score > this.maxScore){
+       maxScoreDOM.innerText= this.score
+    }
+  }
+
+
+
+
 
   //*SPAWN (BONUS: aleatorio en dos carrilles)
 
@@ -118,6 +134,9 @@ class Game {
       this.isGameOver = true;
       canvas.style.display = "none";
       gameOverScreen.style.display = "flex";
+      
+      
+      
     }
   };
 
@@ -133,8 +152,13 @@ class Game {
       this.ballArr.push(new Ball(150));
 
       //! implementar el score total
+      this.maxScore = this.score
+      
       this.score = this.score + 1;
-      newScore.innerText = this.score;
+     
+     
+      yourScoreDOM.innerText = this.score;
+      
     }
   };
 
@@ -150,8 +174,12 @@ class Game {
       eachFive.audioFive();
 
       //!implementar el score total
+      this.maxScore = this.score
+      
       this.score = this.score + 5;
-      newScore.innerText = this.score;
+
+
+      yourScoreDOM.innerText = this.score;
     }
   };
 
@@ -169,18 +197,19 @@ class Game {
       
 
       this.zapatillaArr.splice(i, 1);
-      //   //this.lifeArr.splice(this.lifeArr[1], 1);
+      
       
 
       this.lifeArr.pop();
       
       
         if(this.lifeArr.length === 0){
-
+          
           this.audio.pause();
           this.isGameOver = true;
           canvas.style.display = "none";
           gameOverScreen.style.display = "flex";
+          
        }
     }
   };
