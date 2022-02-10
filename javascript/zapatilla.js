@@ -7,6 +7,7 @@ class Zapatilla {
     this.img = new Image();
     this.img.src = "./img/zapatilla.png";
     this.audio = new Audio("../sounds/swish_2.wav");
+    this.posicionInicial = positionY 
   }
 
   drawZapatilla = () => {
@@ -26,13 +27,18 @@ class Zapatilla {
     // this.audioZapatilla();
   };
 
-  moveDigonalZapatilla = () => {
-    if (this.y > canvas.widht / 2) {
-      this.x = this.x + 3;
-      this.y = this.y - 2;
-    } else if (this.y < canvas.width / 2) {
-      this.x = this.x + 3;
-      this.y = this.y + 2;
+  moveDiagonalZapatilla = () => {
+
+    if (this.posicionInicial >= 300) {
+      this.x = this.x + 6;
+      this.y = this.y - 3;
+    } 
+    
+    if (this.posicionInicial < 300) {
+      this.x = this.x + 6;
+      this.y = this.y + 3;
     }
+
+
   };
 }
