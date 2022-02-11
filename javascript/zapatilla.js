@@ -6,7 +6,7 @@ class Zapatilla {
     this.height = 30;
     this.img = new Image();
     this.img.src = "./img/zapatilla.png";
-    this.audio = new Audio("../sounds/swish_2.wav");
+    this.audio = new Audio("./sounds/swish_2.wav");
     this.posicionInicial = positionY 
   }
 

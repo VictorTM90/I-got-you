@@ -30,7 +30,13 @@ const startGame = () =>{
     newGame.audio.play(); 
     newGame.audio.loop = true;
     newGame.audio.volume = 0.1;
-   
+    console.log(Number(yourScoreDOM.innerTex))
+    maxScoreDOM.innerText = yourScoreDOM.innerText
+
+    //  if (Number (yourScoreDOM.innerText) > Number (maxScoreDOM.innerText)){
+    //      maxScoreDOM.innerTexT = newGame.score
+    //  };
+
     yourScoreDOM.innerText = 0; 
     
     newGame.gameLoop();
