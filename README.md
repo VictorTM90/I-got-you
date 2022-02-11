@@ -50,21 +50,37 @@ Class Game:
 
 
 Class Grandma:
-    drawGrandMa
-    moveGrandMa()
 
-Class Boy: 
-    drawBoy()    
-    moveBoy(event)
+        drawGrandMa
+        moveGrandMa()
+
+Class Boy:
+
+        drawBoy()    
+        moveBoy(event)
 
 Class five: 
-    drawFive()
-    audioFive()
+
+        drawFive()
+        audioFive()
 
 Class life: 
-    drawLife ()
 
-Class 
+        drawLife ()
+
+Class Ball: 
+
+        drawBall()
+        clearBall ()
+
+Class Zapatilla:
+
+        drawZapatilla () 
+        audioZapatilla ()
+            setTimeout()
+        moveDiagonalZapatilla() 
+
+   
 
 
 

@@ -7,7 +7,7 @@ let canvas = document.querySelector("#canvas")
 let ctx = canvas.getContext("2d")
 let newGame; 
 
-//!let maxScore=0; 
+//let maxScore=0; 
 
 
 //*Selector del score. 
