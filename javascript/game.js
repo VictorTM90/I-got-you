@@ -15,11 +15,9 @@ class Game {
     this.lifeArr = [new life(20), new life(85), new life(145)];
 
     this.count = 0;
-    
+
     this.score = 0;
-    this.maxScore = 0;
-   
-   
+
     this.positionX = 0;
     this.positionY = 0;
 
@@ -36,20 +34,7 @@ class Game {
     ctx.drawImage(this.bg, 0, 0, canvas.width, canvas.height);
   };
 
- //* SCORE 
-
-  comparationScore = () =>{
-    this.score = this.maxScore
-    if (this.score > this.maxScore){
-       maxScoreDOM.innerText= this.score
-    }
-  }
-
-
-
-
-
-  //*SPAWN (BONUS: aleatorio en dos carrilles)
+// Spawn (abuelas, zapatillas, 5 puntos)
 
   spawnGrandMa = () => {
     let lastGrandMa = this.grandMaArr[this.grandMaArr.length - 1];
@@ -81,19 +66,19 @@ class Game {
     //   });
     // }
   };
-
+// Función condicionada a la propiedad this.score (puntuación del juego). 
   spawnZapatilla = () => {
     // segun score
     if (this.score > 20) {
       let postParamX = this.positionX + 40;
       let postParamY = this.positionY + 40;
-      // crear zapatilla  // agregar a la arr
       let newZapatilla = new Zapatilla(postParamX, postParamY);
       this.zapatillaArr.push(newZapatilla);
       newZapatilla.audioZapatilla();
     }
   };
 
+  // spawn de los 5 puntos está condicionado a la cantidad de veces que el jugador teclea las flechas para moverse, se contabilizan en this.count
   spawnFive = (event) => {
     if (this.count >= 25) {
       this.fiveArr.push(new Five());
@@ -108,7 +93,7 @@ class Game {
     }
   };
 
-  //*limit move Boy---------------------------------------------------------------------------
+  //*limit move Boy ( límite de movimiento dentro del canvas)
   boyLimitedMov = () => {
     if (this.boy.x > canvas.width - this.boy.width) {
       this.boy.x = canvas.width - this.boy.width;
@@ -123,23 +108,7 @@ class Game {
 
   //* Colisiones-----------------------------------------------------------------------------
 
-  collisionBoyGrandMa = (eachGrandMaParam) => {
-    if (
-      this.boy.x < eachGrandMaParam.x + eachGrandMaParam.width / 2 &&
-      this.boy.x + this.boy.width / 2 > eachGrandMaParam.x &&
-      this.boy.y < eachGrandMaParam.y + eachGrandMaParam.height / 1.3 &&
-      this.boy.height / 1.3 + this.boy.y > eachGrandMaParam.y
-    ) {
-      this.audio.pause();
-      this.isGameOver = true;
-      canvas.style.display = "none";
-      gameOverScreen.style.display = "flex";
-      
-      
-      
-    }
-  };
-
+  // Colisiones que suman puntos: 
   collisionBallBoy = (eachBall, i) => {
     if (
       this.boy.x < eachBall.x + eachBall.width / 2 &&
@@ -151,14 +120,11 @@ class Game {
 
       this.ballArr.push(new Ball(150));
 
-      //! implementar el score total
-      this.maxScore = this.score
-      
+     
+
       this.score = this.score + 1;
-     
-     
+
       yourScoreDOM.innerText = this.score;
-      
     }
   };
 
@@ -173,16 +139,32 @@ class Game {
 
       eachFive.audioFive();
 
-      //!implementar el score total
-      this.maxScore = this.score
       
       this.score = this.score + 5;
-
 
       yourScoreDOM.innerText = this.score;
     }
   };
+  // Colisión y GameOver 
+  collisionBoyGrandMa = (eachGrandMaParam) => {
+    if (
+      this.boy.x < eachGrandMaParam.x + eachGrandMaParam.width / 2 &&
+      this.boy.x + this.boy.width / 2 > eachGrandMaParam.x &&
+      this.boy.y < eachGrandMaParam.y + eachGrandMaParam.height / 1.3 &&
+      this.boy.height / 1.3 + this.boy.y > eachGrandMaParam.y
+    ) {
+      this.audio.pause();
+      this.isGameOver = true;
+      canvas.style.display = "none";
+      gameOverScreen.style.display = "flex";
 
+      // if (this.score > maxScore) {
+      //   maxScore = this.score;
+      //   maxScoreDOM.innerTexT = this.score;
+      // }
+    }
+  };
+  // Colisión que resta vidas, a la 4 colisión se inicia GameOver
   collisionZapatilla = (eachZapatillaParam, i) => {
     if (
       this.boy.x < eachZapatillaParam.x + eachZapatillaParam.width &&
@@ -191,26 +173,24 @@ class Game {
       this.boy.height + this.boy.y > eachZapatillaParam.y
     ) {
       //?-------------Boy---------------------
-      // this.boy.notMove();
+      
 
       //?--------------Vida-----------------
-      
 
       this.zapatillaArr.splice(i, 1);
-      
-      
 
       this.lifeArr.pop();
-      
-      
-        if(this.lifeArr.length === 0){
-          
-          this.audio.pause();
-          this.isGameOver = true;
-          canvas.style.display = "none";
-          gameOverScreen.style.display = "flex";
-          
-       }
+
+      if (this.lifeArr.length === 0) {
+        this.audio.pause();
+        this.isGameOver = true;
+        canvas.style.display = "none";
+        gameOverScreen.style.display = "flex";
+
+        // if (this.score > maxScore) {
+        //   maxScoreDOM.innerTexT = this.score;
+        // }
+      }
     }
   };
 
@@ -221,15 +201,15 @@ class Game {
     this.clearBackground();
 
     //*-------------------------------------------------------------------------------MOVIMIENTOS Y ACCIONES
-    //todo: Boy
+    // Boy
     this.boyLimitedMov();
 
-    //todo: ABUELA
+    // ABUELA
     //* SPAWN Y MOVE
     this.grandMaArr.forEach((eachGrandMa) => {
-     if (this.score >= 30) {
-        eachGrandMa.moveGrandMa(6);
-      }  else if (this.score > 10 && this.score < 30) {
+      if (this.score >= 30) {
+        eachGrandMa.moveGrandMa(7);
+      } else if (this.score > 10 && this.score < 30) {
         eachGrandMa.moveGrandMa(6);
       } else if (this.score <= 10) {
         eachGrandMa.moveGrandMa(3);
@@ -238,12 +218,10 @@ class Game {
 
     this.spawnGrandMa();
 
-    //todo: Zapatilla
+    // Zapatilla
     this.zapatillaArr.forEach((eachZapatilla) => {
       if (this.score >= 30) {
         eachZapatilla.moveDiagonalZapatilla();
-
-        
       } else {
         eachZapatilla.moveZapatilla();
       }
@@ -288,14 +266,12 @@ class Game {
       eachlife.drawLife();
     });
 
-    // ESTO SOLO VA A FUNCIONAR CUANDO SCORE TENGA VALOR
-
     this.fiveArr.forEach((eachFive) => {
       eachFive.drawFive();
     });
 
-    // recursion para la animacion
 
+    // recursion para la animacion
     if (!this.isGameOver) {
       requestAnimationFrame(this.gameLoop);
     }

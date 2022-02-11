@@ -1,57 +1,71 @@
 **Project's name**
 
-I got you !
+I'll got you !
  
 **Description**
 
 El objetivo del juego es mantenerse el mayor tiempo posible sin que las abuelas te atrapen. 
 El jugador puede moverser horizontalmente y saltar. El juego finaliza cuando una abuela te atrapa. 
-La puntuación se calcula según el tiempo que se consigue. 
+La puntuación se calcula según la cantidad de veces que has chutado la pelota y los bouns por el movimiento (+ 5 puntos). 
 
 **MVP**
 
-El juego tiene un personaje principal que se mueve arriba y abajo. 
+El juego tiene un personaje principal que se desplaza y suma puntos cuando colisiona. 
 
-Las abuelas aparecen de forma aleatoria de ambos lados de la pantalla. 
+Las abuelas tiran zapatillas. 
 
 Si una abuela te pilla, se acaba el juego. 
-
-
-
-Un contador de tiempo. 
 
 
 **Backlog**
 
 Incrementar la dificultad:
 
-El personaje principal mientras evita las abuelitas, chuta una pelota. 
-
-Las abuelas disparan zapatillas, pero se reduce la velocidad. 
+Abuelas aparecen de ámbos lados del canvas. 
+Al colisionar con una zapatilla, el desplazamiento se reduce. 
+Puntuación Máxima. 
 
 
 **Data Structure** 
 
-Class Grandma:
-    Propiedades ()
 
-    Métodos[draw / move ] 
+Main : 
 
-
-Class Child: 
-    Propiedades:  ()
-
-    Métodos [draw, move, jump ] 
+ StartGame()
+ ReStartGame()
 
 Class Game: 
-    Propiedades: ()
 
-    Métodos : [ GameLoop, collision, background, clearCanvas, spawningGrandma ]
+    clearBackground()
+    drawBackground()
+    spawnGrandMa()
+    spawnZapatilla()
+    spawnFive()
+    boyLimitedMov()
+    collisionBallBoy()
+    collisionFiveBoy()
+    collisionBoyGrandMa()
+    collisionZapatilla()
+    gameLoop()
 
-Class time: 
-    Propiedades: ()
 
-    Métodos [...]
+Class Grandma:
+    drawGrandMa
+    moveGrandMa()
+
+Class Boy: 
+    drawBoy()    
+    moveBoy(event)
+
+Class five: 
+    drawFive()
+    audioFive()
+
+Class life: 
+    drawLife ()
+
+Class 
+
 
 
 **States y States Transitions**
@@ -61,11 +75,6 @@ Game screen (pantalla del juego)
 Game over screen (pantalla final y re-start)
 
 
-**Task**
-
-
-
-Additional Links 
 
 
 

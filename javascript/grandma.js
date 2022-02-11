@@ -10,9 +10,11 @@ class Grandma {
     }
 
     //*Acciones y métodos
+
     drawGrandMa= ()=>{
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
+    // SpaceMoveParam condicionado al Score de la partida. 
     
     moveGrandMa = (spaceMoveParam) =>{
         

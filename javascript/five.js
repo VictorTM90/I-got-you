@@ -10,10 +10,11 @@ class Five {
         this.audio = new Audio ("./sounds/cartoon_wink_magic_sparkle-6896.mp3")
     }
 
+    // Dibujar five
     drawFive=()=>{
         ctx.drawImage (this.img, this.x, this.y, this.width, this.height); 
     }
-
+    // audio
     audioFive = ()=>{
         this.audio.volume = 0.2;
         this.audio.play();

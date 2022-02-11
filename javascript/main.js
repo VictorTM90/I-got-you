@@ -7,7 +7,7 @@ let canvas = document.querySelector("#canvas")
 let ctx = canvas.getContext("2d")
 let newGame; 
 
-let maxScore; 
+//!let maxScore=0; 
 
 
 //*Selector del score. 
@@ -30,8 +30,11 @@ const startGame = () =>{
     newGame.audio.play(); 
     newGame.audio.loop = true;
     newGame.audio.volume = 0.1;
-    console.log(Number(yourScoreDOM.innerTex))
-    maxScoreDOM.innerText = yourScoreDOM.innerText
+
+    
+
+  
+   // maxScoreDOM.innerText = yourScoreDOM.innerText
 
     //  if (Number (yourScoreDOM.innerText) > Number (maxScoreDOM.innerText)){
     //      maxScoreDOM.innerTexT = newGame.score

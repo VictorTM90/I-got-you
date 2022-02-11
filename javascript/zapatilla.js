@@ -22,11 +22,14 @@ class Zapatilla {
     }, 500);
   };
 
+  // movimiento normal
   moveZapatilla = () => {
     this.x = this.x + 10;
-    // this.audioZapatilla();
+    
   };
 
+  // movimiento en diagonal condicionado al score de la partida
+  
   moveDiagonalZapatilla = () => {
 
     if (this.posicionInicial >= 300) {
